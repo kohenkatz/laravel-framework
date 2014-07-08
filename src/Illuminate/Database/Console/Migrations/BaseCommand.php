@@ -21,6 +21,15 @@ class BaseCommand extends Command {
 			return $this->laravel['path.base'].'/'.$path;
 		}
 
+		$path = $this->laravel['config']['database.migration_path'];
+
+		// Next, check if an a path has been set in the database.php
+		// configuration file.
+		if ( ! is_null($path))
+		{
+			return $this->laravel['path.base'].$path;
+		}
+
 		$package = $this->input->getOption('package');
 
 		// If the package is in the list of migration paths we received we will put
